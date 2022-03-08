@@ -36,11 +36,11 @@ export const Form = () => {
     setIsLoading(false)
   };
 
-  const onSlugChange = (e: any) => setValue("slug", e.target.value.toLowerCase().replaceAll(' ', '-'))
+  const onSlugChange = (e: any) => setValue("slug", e.target.value.trim().toLowerCase().replaceAll(' ', '-'))
 
   useEffect(() => {
     setValue('slug', storeNameValue?.toLowerCase().replaceAll(' ', '-'))
-  }, [storeNameValue])
+  }, [setValue, storeNameValue])
 
   return (
     <form className="FormSection" onSubmit={handleSubmit(onSubmit)}>

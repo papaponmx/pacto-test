@@ -57,10 +57,6 @@ export const Form = () => {
       </p>
 
       </label>
-      <label>
-          Slug
-      <input disabled type="text" placeholder="Slug" {...register("slug", {required: true, maxLength: 100})} onChange={onSlugChange} />
-      </label>
       <p></p>
       <label>
           Email
@@ -73,11 +69,11 @@ export const Form = () => {
         }
       })}
       />
+      </label>
       <p>
-      {errors.email && `Your email is not valid`}
+        {errors.email && `Your email is not valid`}
       </p>
 
-      </label>
       <label>
           Phone Number
       <input type="tel" placeholder="Phone number" {...register("phoneNumber", {required: true, maxLength: 12})} />
@@ -96,6 +92,14 @@ export const Form = () => {
         <option value=" Dark Kitchen"> Dark Kitchen</option>
       </select>
       </label>
+      <p></p>
+
+
+      <label>
+          Slug
+        <input disabled type="text" placeholder="Slug" {...register("slug", {required: true, maxLength: 100})} onChange={onSlugChange} />
+      </label>
+      <p></p>
 
       {
         isLoading ?

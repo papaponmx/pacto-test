@@ -38,9 +38,6 @@ export const Form = () => {
 
   const onSlugChange = (e: any) => setValue("slug", e.target.value.toLowerCase().replaceAll(' ', '-'))
 
-  const autoGenerateSlug = () => setValue('slug', storeNameValue?.toLowerCase().replaceAll(' ', '-'))
-
-
   useEffect(() => {
     setValue('slug', storeNameValue?.toLowerCase().replaceAll(' ', '-'))
   }, [storeNameValue])

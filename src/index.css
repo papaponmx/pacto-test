@@ -65,7 +65,7 @@ body {
 .FormSection input[type=email],
 .FormSection select,
 .FormSection textarea{
-	border-radius: 3px;
+	border-radius: 6px;
 	border: 1px solid #FFC2DC;
 	outline: none;
 	color: #F072A9;
@@ -81,12 +81,29 @@ body {
 	padding: 5px 15px 5px 15px;
 	color: #FFCBE2;
 	box-shadow: inset -1px -1px 3px #FF62A7;
-	border-radius: 3px;
-	border-radius: 3px;
+	border-radius: 6px;
 	font-weight: bold;
+}
+
+.FormSection button {
+  background: #ffe7f1;
+	border: 1px solid #C94A81;
+	padding: 5px 15px 5px 15px;
+	color: #ca1667;
+	border-radius: 6px;
+  margin-top: -15px;
 }
 
 .required{
 	color:red;
 	font-weight:normal;
+}
+
+.FormSection label {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: 14px;
+
 }

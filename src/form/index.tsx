@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface InterfaceFormValues {
@@ -11,11 +11,30 @@ interface InterfaceFormValues {
 
 
 export const Form = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<InterfaceFormValues>();
 
   const storeNameValue  = watch("storeName");
 
-  const onSubmit = (data: InterfaceFormValues) => console.log(data);
+  const onSubmit = async (data: InterfaceFormValues) => {
+    setIsLoading(true);
+
+    const res = await fetch(`https://reqres.in/api/user`, {
+      method: 'POST',
+      body: JSON.stringify({
+        "name": "morpheus",
+        "job": "leader",
+        "email": data.email,
+      })
+    })
+
+    const updatedData = res.json()
+
+    console.log('updatedData', updatedData)
+
+
+    setIsLoading(false)
+  };
 
   const onSlugChange = (e: any) => setValue("slug", e.target.value.toLowerCase().replaceAll(' ', '-'))
 
@@ -71,7 +90,11 @@ export const Form = () => {
       </select>
       </label>
 
-      <input type="submit" />
+      {
+        isLoading ?
+        <button type="submit" disabled>Loading...</button> :
+        <input type="submit" />
+      }
     </form>
   );
 }

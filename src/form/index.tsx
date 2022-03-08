@@ -80,6 +80,9 @@ export const Form = () => {
           Phone Number
       <input type="tel" placeholder="Phone number" {...register("phoneNumber", {required: true, maxLength: 12})} />
       </label>
+      {errors.phoneNumber && <p>Phone number is required</p>}
+
+
       <label>
           Store Type
       <select title="Store Type" {...register("storeType", { required: true })}>

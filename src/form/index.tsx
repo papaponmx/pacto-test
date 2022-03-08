@@ -55,13 +55,16 @@ export const Form = () => {
         maxLength: 80,
         validate: (value) => value.length > 3}
       )} />
-            {errors.storeName && <p>Your store name is less than 3 characters</p>}
+      <p>
+        {errors.storeName && `Your store name is less than 3 characters`}
+      </p>
 
       </label>
       <label>
           Slug
       <input disabled type="text" placeholder="Slug" {...register("slug", {required: true, maxLength: 100})} onChange={onSlugChange} />
       </label>
+      <p></p>
       <label>
           Email
       <input type="text" placeholder="Email" {...register("email", {
@@ -73,14 +76,18 @@ export const Form = () => {
         }
       })}
       />
-      {errors.email && <p>Your email is not valid</p>}
+      <p>
+      {errors.email && `Your email is not valid`}
+      </p>
 
       </label>
       <label>
           Phone Number
       <input type="tel" placeholder="Phone number" {...register("phoneNumber", {required: true, maxLength: 12})} />
       </label>
-      {errors.phoneNumber && <p>Phone number is required</p>}
+      <p>
+      {errors.phoneNumber && `Phone number is required`}
+      </p>
 
 
       <label>

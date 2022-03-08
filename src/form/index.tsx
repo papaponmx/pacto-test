@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface InterfaceFormValues {
@@ -11,27 +12,50 @@ interface InterfaceFormValues {
 
 export const Form = () => {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<InterfaceFormValues>();
+
+  const storeNameValue  = watch("storeName");
+
   const onSubmit = (data: InterfaceFormValues) => console.log(data);
-  console.log(errors);
 
   const onSlugChange = (e: any) => setValue("slug", e.target.value.toLowerCase().replaceAll(' ', '-'))
 
-  const autoGenerateSlug = () => setValue('slug', watch('storeName').toLowerCase().replaceAll(' ', '-'))
+  const autoGenerateSlug = () => setValue('slug', storeNameValue?.toLowerCase().replaceAll(' ', '-'))
+
+
+  useEffect(() => {
+    setValue('slug', storeNameValue?.toLowerCase().replaceAll(' ', '-'))
+  }, [storeNameValue])
 
   return (
     <form className="FormSection" onSubmit={handleSubmit(onSubmit)}>
       <label>
           Store Name
-      <input type="text" placeholder="Store name" {...register("storeName", {required: true, min: 2, maxLength: 80})} />
+      <input type="text" placeholder="Store name" {...register("storeName", {
+        required: true,
+        min: 3,
+        maxLength: 80,
+        validate: (value) => value.length > 3}
+      )} />
+            {errors.storeName && <p>Your store name is less than 3 characters</p>}
+
       </label>
       <label>
           Slug
-      <input type="text" placeholder="Slug" {...register("slug", {required: true, maxLength: 100})} onChange={onSlugChange} />
+      <input disabled type="text" placeholder="Slug" {...register("slug", {required: true, maxLength: 100})} onChange={onSlugChange} />
       </label>
-      <button onClick={autoGenerateSlug}>Auto Generate Slug</button>
       <label>
           Email
-      <input type="text" placeholder="Email" {...register("email", {required: true, pattern: /^\S+@\S+$/i})} />
+      <input type="text" placeholder="Email" {...register("email", {
+        required: true,
+        pattern: /^\S+@\S+$/i,
+        validate: (value) => {
+        const emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{3}');
+        return emailRegex.test(value);
+        }
+      })}
+      />
+      {errors.email && <p>Your email is not valid</p>}
+
       </label>
       <label>
           Phone Number

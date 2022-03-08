@@ -94,9 +94,16 @@ body {
   margin-top: -15px;
 }
 
-.required{
-	color:red;
-	font-weight:normal;
+p {
+  color: #bf1650;
+  font-size: 12px;
+  margin-top: 0;
+
+}
+
+p::before {
+  display: inline;
+  content: "⚠ ";
 }
 
 .FormSection label {
